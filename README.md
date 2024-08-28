@@ -1,6 +1,6 @@
 ## Overview
 
-This is the "Quickstart React" example Monday app. With a candle ordering UI built on it. The UI Elements are from [the Vibe UI Kit](https://style.monday.com/?path=/docs/welcome--docs)
+This is the "Quickstart React" example Monday app, with a candle ordering UI built on it. The UI Elements are from [the Vibe UI Kit](https://style.monday.com/?path=/docs/welcome--docs)
 
 ## Run the project
 
