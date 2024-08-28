@@ -9,11 +9,7 @@ import Dropdown from "monday-ui-react-core/dist/Dropdown.js";
 import Button from "monday-ui-react-core/dist/Button.js";
 import Toast from "monday-ui-react-core/dist/Toast.js";
 
-// Usage of mondaySDK example, for more information visit here: https://developer.monday.com/apps/docs/introduction-to-the-sdk/
-const monday = mondaySdk();
-
 const App = () => {
-  const [_context, setContext] = useState();
   const [fragrances, setFragrances] = useState([]);
 
   // values to create a new order
@@ -44,6 +40,24 @@ const App = () => {
     }
   };
 
+  const validateFields = () => {
+    if (firstName === "" || lastName === "" || quantity === 0) {
+      setToastOpen(true);
+      setToastMessage("Please fill out all fields.");
+      setToastType("negative");
+      return false;
+    }
+
+    if (selectedFragrance.length === 0) {
+      setToastOpen(true);
+      setToastMessage("Please select a fragrance.");
+      setToastType("negative");
+      return false;
+    }
+
+    return true;
+  };
+
   const createOrder = async () => {
     // Validate the fields before creating the order
     if (!validateFields()) {
@@ -57,6 +71,7 @@ const App = () => {
         .join(", ");
 
       // Board Id "7302640219" is the board id of the "Production Orders" board for candles
+      // TODO: If the complexity of the app increases consider creating a redis queue to handle the order creation
       const createOrder = await fetch("https://api.monday.com/v2", {
         method: "POST", // POST for GraphQL queries
         headers: {
@@ -65,6 +80,7 @@ const App = () => {
           "API-Version": "2023-04",
         },
         // Create item mutation for the "Production Orders" board for the New Order group
+        // TODO: Consider moving the queries/mutations to a separate file if the app grows
         body: JSON.stringify({
           query: `
             mutation {
@@ -106,40 +122,12 @@ const App = () => {
     }
   };
 
-  const validateFields = () => {
-    if (firstName === "" || lastName === "" || quantity === 0) {
-      setToastOpen(true);
-      setToastMessage("Please fill out all fields.");
-      setToastType("negative");
-      return false;
-    }
-
-    if (selectedFragrance.length === 0) {
-      setToastOpen(true);
-      setToastMessage("Please select a fragrance.");
-      setToastType("negative");
-      return false;
-    }
-
-    return true;
-  };
-
   useEffect(() => {
     fetchFragrances();
   }, []);
 
-  useEffect(() => {
-    // Notice this method notifies the monday platform that user gains a first value in an app.
-    // Read more about it here: https://developer.monday.com/apps/docs/mondayexecute#value-created-for-user/
-    monday.execute("valueCreatedForUser");
-
-    // TODO: set up event listeners, Here`s an example, read more here: https://developer.monday.com/apps/docs/mondaylisten/
-    monday.listen("context", (res) => {
-      setContext(res.data);
-    });
-  }, []);
-
   return (
+    // TODO: Consider moving to reactive form library like Formik if the complexity of the form increases
     <div className="app-main">
       <Flex style={{ width: "100%" }} justify={Flex.justify.SPACE_BETWEEN}>
         <TextField

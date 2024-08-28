@@ -11,26 +11,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
-.app-main {
-  height: 100vh;
-  align-content: center;
-  padding: 20px;
-}
-
-.text-field {
-  margin-right: 5px;
-  margin-left: 5px;
-}
-
-.dropdown {
-  width: 100%;
-  margin-right: 5px;
-  margin-left: 5px;
-}
-
-.submit-button {
-  margin-right: 5px;
-  margin-left: 5px;
-  width: 50%;
-}

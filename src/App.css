@@ -3,10 +3,25 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
-.App {
+.app-main {
   height: 100vh;
-  width: 100vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  align-content: center;
+  padding: 20px;
+}
+
+.text-field {
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.dropdown {
+  width: 100%;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.submit-button {
+  margin-right: 5px;
+  margin-left: 5px;
+  width: 50%;
 }
