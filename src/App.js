@@ -183,7 +183,9 @@ const App = () => {
       </Flex>
 
       <Flex style={{ width: "100%", marginTop: "10px" }}>
-        <Button onClick={createOrder}>Start Order</Button>
+        <Button className="submit-button" onClick={createOrder}>
+          Start Order
+        </Button>
       </Flex>
       <Toast
         open={toastOpen}
